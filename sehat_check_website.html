@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEHAT CHECK — Pause. Verifikasi. Lindungi.</title>
+<meta name="description" content="SEHAT CHECK adalah pusat edukasi untuk membantu masyarakat mengenali dan memeriksa informasi kesehatan yang menyesatkan.">
+<style>
+:root{
+  --teal:#0f766e;--teal2:#14b8a6;--blue:#2563eb;--navy:#123047;
+  --cream:#f7fbfa;--white:#fff;--muted:#5f7280;--danger:#dc2626;
+  --warning:#d97706;--line:#dcebea;--shadow:0 16px 45px rgba(18,48,71,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--navy);background:var(--cream);line-height:1.6}
+a{text-decoration:none;color:inherit}
+button,input,textarea{font:inherit}
+.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(247,251,250,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(220,235,234,.8)}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:900;font-size:1.3rem;letter-spacing:-.04em;color:var(--teal)}
+.logo span{color:var(--navy)}
+.navlinks{display:flex;gap:25px;align-items:center;font-size:.92rem;font-weight:700}
+.navlinks a:hover{color:var(--teal)}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;transition:.2s}
+.btn-primary{background:var(--teal);color:#fff;box-shadow:0 8px 20px rgba(15,118,110,.2)}
+.btn-primary:hover{transform:translateY(-2px);background:#0b655e}
+.btn-outline{border:1px solid var(--teal);color:var(--teal);background:#fff}
+.menu{display:none;background:none;border:0;font-size:1.5rem}
+.hero{padding:85px 0 75px;background:radial-gradient(circle at 85% 15%,#d9f7f2 0,transparent 35%),linear-gradient(180deg,#f7fbfa,#edf8f7)}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:55px;align-items:center}
+.badge{display:inline-flex;gap:8px;align-items:center;background:#dff6f1;color:var(--teal);padding:7px 12px;border-radius:999px;font-size:.82rem;font-weight:800;margin-bottom:18px}
+h1{font-size:clamp(2.6rem,6vw,5rem);line-height:1.02;letter-spacing:-.055em;margin-bottom:22px}
+h1 em{font-style:normal;color:var(--teal)}
+.hero p{font-size:1.08rem;color:var(--muted);max-width:620px;margin-bottom:28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-visual{position:relative;min-height:410px}
+.glow{position:absolute;inset:20px;background:radial-gradient(circle,#bdeee7,transparent 60%);filter:blur(15px)}
+.panel{position:absolute;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:20px}
+.noise{left:0;top:30px;width:68%;transform:rotate(-4deg)}
+.clear{right:0;bottom:20px;width:70%;transform:rotate(3deg)}
+.panel-title{font-weight:900;margin-bottom:13px}
+.post{padding:10px 12px;border-radius:11px;background:#f4f8f8;margin:8px 0;font-size:.84rem}
+.post.bad{border-left:4px solid var(--danger)}
+.post.good{border-left:4px solid var(--teal)}
+.check{color:var(--teal);font-weight:900}
+section{padding:82px 0}
+.section-head{max-width:720px;margin-bottom:38px}
+.kicker{color:var(--teal);font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;margin-bottom:8px}
+h2{font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:-.04em;margin-bottom:13px}
+.section-head p{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:23px;box-shadow:0 8px 28px rgba(18,48,71,.05)}
+.icon{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:#e5f7f4;font-size:1.35rem;margin-bottom:15px}
+.card h3{font-size:1.02rem;margin-bottom:7px}
+.card p{font-size:.9rem;color:var(--muted)}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);align-items:center;gap:10px;margin-top:28px}
+.flow .step{background:#fff;border:1px solid var(--line);padding:18px 10px;border-radius:15px;text-align:center;font-weight:800;font-size:.88rem}
+.arrow{text-align:center;color:var(--teal);font-weight:900}
+.personas{grid-template-columns:repeat(3,1fr)}
+.persona{min-height:230px;background:linear-gradient(145deg,#fff,#effaf8)}
+.quote{margin-top:38px;background:var(--navy);color:#fff;padding:38px;border-radius:24px;font-size:clamp(1.3rem,3vw,2rem);font-weight:800;line-height:1.25}
+.quote span{display:block;color:#9eddd6;font-size:.82rem;margin-top:14px;font-weight:600}
+.causes{background:#eef8f7}
+.cause-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cause{display:flex;gap:17px;background:#fff;border:1px solid var(--line);padding:23px;border-radius:18px}
+.num{flex:0 0 40px;height:40px;border-radius:50%;background:#dff6f1;color:var(--teal);display:grid;place-items:center;font-weight:900}
+.fact{background:linear-gradient(135deg,#0d5f59,#123047);color:#fff}
+.fact .section-head p{color:#d5e8e6}
+.factbox{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.chat,.result{background:#fff;border-radius:22px;color:var(--navy);padding:22px;box-shadow:var(--shadow)}
+.chat-header{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:15px;margin-bottom:16px}
+.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#dff6f1}
+textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:15px;resize:vertical;outline:none}
+textarea:focus{border-color:var(--teal)}
+.chat-actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px}
+.example{font-size:.78rem;color:var(--muted)}
+.result.hidden{display:none}
+.status{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:.75rem;font-weight:900;background:#fee2e2;color:var(--danger);margin:10px 0}
+.result h3{font-size:1.45rem;margin-bottom:8px}
+.meter{margin:18px 0}
+.meter-row{display:flex;justify-content:space-between;font-size:.82rem;margin:8px 0}
+.bar{height:8px;background:#e8efef;border-radius:20px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal);border-radius:20px}
+.ai-note{font-size:.76rem;color:#687b83;margin-top:18px}
+.how{background:#fff}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.step-card{position:relative;border-top:4px solid var(--teal);padding:23px;background:#f8fcfb;border-radius:15px}
+.manifesto{text-align:center;background:linear-gradient(135deg,#dff6f1,#eef7ff)}
+.manifesto h2{font-size:clamp(2.8rem,7vw,6rem);color:var(--navy);line-height:.95}
+.manifesto h2 span{color:var(--teal);display:block}
+.manifesto p{max-width:700px;margin:25px auto;color:var(--muted)}
+.resources{grid-template-columns:repeat(4,1fr)}
+.resource a{color:var(--teal);font-weight:800;font-size:.86rem}
+.questions{background:var(--navy);color:#fff}
+.questions .section-head p{color:#cbdde3}
+.questions-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.question{background:#193e54;border:1px solid #31566a;padding:20px;border-radius:16px}
+.question strong{font-size:1.25rem;color:#8ee1d7;display:block;margin-bottom:5px}
+.access{position:fixed;right:18px;bottom:18px;z-index:30}
+.access button{width:52px;height:52px;border-radius:50%;border:0;background:var(--teal);color:#fff;font-size:1.25rem;box-shadow:var(--shadow);cursor:pointer}
+.access-panel{display:none;position:absolute;right:0;bottom:62px;width:220px;background:#fff;border:1px solid var(--line);padding:15px;border-radius:15px;box-shadow:var(--shadow)}
+.access-panel button{width:100%;height:auto;border-radius:8px;background:#f2f7f7;color:var(--navy);margin:4px 0;padding:8px}
+footer{background:#0b2636;color:#c9dce4;padding:55px 0 25px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:35px}
+footer h3{color:#fff;margin-bottom:10px}
+footer a{display:block;margin:7px 0;font-size:.9rem}
+.small{font-size:.8rem;color:#91aab5;margin-top:35px;border-top:1px solid #294353;padding-top:18px}
+.high-contrast{filter:contrast(1.18)}
+.big-text{font-size:110%}
+@media(max-width:900px){
+  .navlinks{display:none}.menu{display:block}
+  .hero-grid,.factbox{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr 1fr}.personas,.resources{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}
+  .steps{grid-template-columns:1fr 1fr}.questions-grid{grid-template-columns:1fr 1fr}
+  .cause-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .hero{padding-top:55px}.hero-visual{min-height:330px}
+  .noise,.clear{width:82%}.cards,.personas,.resources,.steps,.questions-grid{grid-template-columns:1fr}
+  section{padding:62px 0}.quote{padding:27px}
+  .nav .btn{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#beranda">SEHAT<span>CHECK</span></a>
+    <nav class="navlinks">
+      <a href="#masalah">Masalah</a>
+      <a href="#akar">Akar Masalah</a>
+      <a href="#factcheck">Fact-Check AI</a>
+      <a href="#sumber">Sumber</a>
+    </nav>
+    <a class="btn btn-primary" href="#factcheck">Cek Fakta</a>
+    <button class="menu" aria-label="Buka menu">☰</button>
+  </div>
+</header>
+
+<main id="beranda">
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="badge">🛡️ Pusat Literasi Kesehatan Digital</div>
+      <h1>Di tengah rumor yang viral, <em>kebenaran</em> jangan sampai sakit.</h1>
+      <p>Informasi kesehatan menyebar sangat cepat. SEHAT CHECK membantu kamu berhenti sejenak, memeriksa sumber, dan memahami informasi sebelum membagikannya.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#factcheck">🔎 Cek Fakta Sekarang</a>
+        <a class="btn btn-outline" href="#masalah">Pelajari Masalahnya</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-label="Ilustrasi informasi berubah dari rumor menjadi informasi terverifikasi">
+      <div class="glow"></div>
+      <div class="panel noise">
+        <div class="panel-title">📱 Beranda media sosial</div>
+        <div class="post bad">⚠️ “Obat ini bisa menyembuhkan semua penyakit!”</div>
+        <div class="post bad">❓ “Katanya vaksin berbahaya, benar nggak?”</div>
+        <div class="post">🔥 24.8K orang sudah membagikan</div>
+      </div>
+      <div class="panel clear">
+        <div class="panel-title">✓ Informasi terverifikasi</div>
+        <div class="post good"><span class="check">✓ Sumber dapat dipercaya</span><br>Informasi telah diperiksa berdasarkan bukti.</div>
+        <div class="post good"><span class="check">✓ Konteks tersedia</span><br>Pahami klaim sebelum mengambil keputusan.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="masalah">
+<div class="container">
+  <div class="section-head">
+    <div class="kicker">01 — Masalah komunikasi</div>
+    <h2>Infodemi kesehatan itu nyata.</h2>
+    <p>Hoaks kesehatan bukan sekadar informasi yang salah. Jika dipercaya dan disebarkan, informasi tersebut dapat memengaruhi keputusan dan perilaku kesehatan seseorang.</p>
+  </div>
+  <div class="cards">
+    <article class="card"><div class="icon">💊</div><h3>Klaim obat ajaib</h3><p>Janji penyembuhan instan tanpa bukti ilmiah yang memadai.</p></article>
+    <article class="card"><div class="icon">💉</div><h3>Misinformasi vaksin</h3><p>Klaim yang menyesatkan tentang keamanan, efektivitas, atau efek vaksin.</p></article>
+    <article class="card"><div class="icon">🥗</div><h3>Mitos diet & wellness</h3><p>Tren diet, detoks, suplemen, dan tips kesehatan yang belum terverifikasi.</p></article>
+    <article class="card"><div class="icon">📲</div><h3>Rumor viral</h3><p>Informasi mengejutkan yang menyebar karena memicu rasa takut atau penasaran.</p></article>
+  </div>
+  <div class="flow">
+    <div class="step">Rumor</div><div class="arrow">→</div><div class="step">Dibagikan</div><div class="arrow">→</div><div class="step">Viral → Bingung → Berisiko</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="container">
+  <div class="section-head">
+    <div class="kicker">02 — Target audiens</div>
+    <h2>Kami hadir untuk yang khawatir, penasaran, dan rentan.</h2>
+    <p>Setiap orang bisa bertemu informasi kesehatan yang menyesatkan. Namun, kebutuhan informasinya bisa berbeda.</p>
+  </div>
+  <div class="cards personas">
+    <article class="card persona"><div class="icon">👨‍👩‍👧</div><h3>Orang Tua yang Khawatir</h3><p>Mencari informasi tentang kesehatan anak, vaksin, nutrisi, dan penyakit umum.</p></article>
+    <article class="card persona"><div class="icon">📱</div><h3>Generasi Digital</h3><p>Sering menemukan tren kesehatan di TikTok, Instagram, YouTube, dan media sosial lainnya.</p></article>
+    <article class="card persona"><div class="icon">👵</div><h3>Lansia yang Rentan</h3><p>Dapat menjadi sasaran iklan obat palsu, klaim penyembuhan instan, atau penipuan kesehatan.</p></article>
+  </div>
+  <div class="quote">“Hoaks tidak menyebar karena orang itu bodoh. Hoaks menyebar karena orang bisa sedang takut, berharap, atau kewalahan oleh terlalu banyak informasi.”<span>— Prinsip komunikasi kampanye SEHAT CHECK</span></div>
+</div>
+</section>
+
+<section class="causes" id="akar">
+<div class="container">
+  <div class="section-head">
+    <div class="kicker">03 — Akar masalah</div>
+    <h2>Mengapa hoaks kesehatan mudah menyebar?</h2>
+    <p>Kita perlu memahami bukan hanya “apa yang salah”, tetapi juga mengapa sebuah pesan bisa dipercaya dan dibagikan.</p>
+  </div>
+  <div class="cause-grid">
+    <article class="cause"><div class="num">01</div><div><h3>Pemicu emosional</h3><p>Rasa takut dan harapan dapat membuat sebuah pesan terasa benar sebelum kita sempat memeriksanya.</p></div></article>
+    <article class="cause"><div class="num">02</div><div><h3>Ruang gema</h3><p>Algoritma dan lingkungan digital dapat membuat kita terus melihat informasi yang sesuai dengan keyakinan sebelumnya.</p></div></article>
+    <article class="cause"><div class="num">03</div><div><h3>Banjir informasi</h3><p>Begitu banyak artikel, video, dan unggahan membuat sumber yang kredibel lebih sulit ditemukan.</p></div></article>
+    <article class="cause"><div class="num">04</div><div><h3>Otoritas palsu</h3><p>Konten menyesatkan dapat menggunakan istilah ilmiah, gelar, atau tampilan profesional agar terlihat meyakinkan.</p></div></article>
+  </div>
+</div>
+</section>
+
+<section class="fact" id="factcheck">
+<div class="container">
+  <div class="section-head">
+    <div class="kicker">04 — Alat AI</div>
+    <h2>Temui teman cek fakta kamu.</h2>
+    <p>Masukkan klaim kesehatan, pesan WhatsApp, atau potongan caption. Demo AI berikut akan menunjukkan bagaimana proses pemeriksaan dapat bekerja.</p>
+  </div>
+  <div class="factbox">
+    <div class="chat">
+      <div class="chat-header"><div class="avatar">🤖</div><div><strong>SEHAT AI</strong><br><small>Asisten literasi kesehatan</small></div></div>
+      <textarea id="claim" placeholder="Contoh: “Minum air lemon bisa menyembuhkan diabetes secara permanen.”"></textarea>
+      <div class="chat-actions">
+        <span class="example">Tip: masukkan satu klaim yang jelas.</span>
+        <button class="btn btn-primary" onclick="checkClaim()">Analisis Klaim</button>
+      </div>
+    </div>
+    <div class="result hidden" id="result">
+      <small>HASIL ANALISIS</small>
+      <div class="status">⚠ Perlu diverifikasi</div>
+      <h3 id="resultTitle">Klaim berpotensi menyesatkan</h3>
+      <p id="resultText">Masukkan klaim untuk mendapatkan penjelasan.</p>
+      <div class="meter">
+        <div class="meter-row"><span>Kredibilitas sumber</span><strong>Perlu diperiksa</strong></div>
+        <div class="bar"><i style="width:45%"></i></div>
+        <div class="meter-row"><span>Bukti ilmiah</span><strong>Belum cukup</strong></div>
+        <div class="bar"><i style="width:35%"></i></div>
+        <div class="meter-row"><span>Bahasa emosional</span><strong>Terdeteksi</strong></div>
+        <div class="bar"><i style="width:70%"></i></div>
+      </div>
+      <p class="ai-note">Catatan: ini adalah simulasi antarmuka AI untuk edukasi. Hasil AI bukan diagnosis dan bukan pengganti nasihat tenaga kesehatan.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="how">
+<div class="container">
+  <div class="section-head">
+    <div class="kicker">05 — Cara kerja</div>
+    <h2>Dari klaim menjadi pemahaman.</h2>
+    <p>AI dapat membantu menyaring informasi, tetapi keputusan kesehatan tetap perlu mempertimbangkan sumber medis yang kredibel dan tenaga profesional.</p>
+  </div>
+  <div class="steps">
+    <article class="step-card"><strong>01 — MASUKKAN</strong><p>Pengguna mengirimkan klaim atau potongan pesan.</p></article>
+    <article class="step-card"><strong>02 — ANALISIS</strong><p>Sistem mengidentifikasi klaim, bahasa emosional, dan pola mencurigakan.</p></article>
+    <article class="step-card"><strong>03 — VERIFIKASI</strong><p>Informasi dibandingkan dengan sumber ilmiah dan organisasi kesehatan yang kredibel.</p></article>
+    <article class="step-card"><strong>04 — JELASKAN</strong><p>Hasil disajikan dengan bahasa sederhana agar mudah dipahami.</p></article>
+  </div>
+</div>
+</section>
+
+<section class="manifesto">
+<div class="container">
+  <div class="kicker">Pesan kampanye</div>
+  <h2>PAUSE.<span>VERIFIKASI.</span>LINDUNGI.</h2>
+  <p>Kesehatanmu bukan rumor. Sebelum membagikan informasi, periksa sumbernya. Sebelum panik, cari buktinya. Jadilah penyaring informasi, bukan penyebarnya.</p>
+  <a class="btn btn-primary" href="#factcheck">🔎 Cek Fakta Sekarang</a>
+</div>
+</section>
+
+<section id="sumber">
+<div class="container">
+  <div class="section-head">
+    <div class="kicker">Sumber terpercaya</div>
+    <h2>Mulai dari sumber yang dapat dipercaya.</h2>
+    <p>Gunakan organisasi kesehatan resmi dan sumber ilmiah sebagai titik awal untuk memeriksa informasi.</p>
+  </div>
+  <div class="cards resources">
+    <article class="card resource"><div class="icon">🌍</div><h3>WHO</h3><p>Informasi dan panduan kesehatan global.</p><a href="https://www.who.int/" target="_blank" rel="noopener">Kunjungi situs resmi →</a></article>
+    <article class="card resource"><div class="icon">🏥</div><h3>CDC</h3><p>Informasi kesehatan dan pencegahan penyakit.</p><a href="https://www.cdc.gov/" target="_blank" rel="noopener">Kunjungi situs resmi →</a></article>
+    <article class="card resource"><div class="icon">🇮🇩</div><h3>Kementerian Kesehatan RI</h3><p>Informasi kesehatan resmi di Indonesia.</p><a href="https://www.kemkes.go.id/" target="_blank" rel="noopener">Kunjungi situs resmi →</a></article>
+    <article class="card resource"><div class="icon">🔬</div><h3>BPOM</h3><p>Informasi terkait obat, makanan, dan produk kesehatan.</p><a href="https://www.pom.go.id/" target="_blank" rel="noopener">Kunjungi situs resmi →</a></article>
+  </div>
+</div>
+</section>
+
+<section class="questions">
+<div class="container">
+  <div class="section-head">
+    <div class="kicker">Sebelum membagikan</div>
+    <h2>Berhenti. Tanyakan 5 hal ini.</h2>
+    <p>Literasi digital dimulai dari kebiasaan sederhana untuk tidak langsung percaya dan membagikan.</p>
+  </div>
+  <div class="questions-grid">
+    <div class="question"><strong>SIAPA?</strong>Siapa yang mengatakan informasi ini?</div>
+    <div class="question"><strong>APA?</strong>Apa bukti yang mendukungnya?</div>
+    <div class="question"><strong>KAPAN?</strong>Kapan informasi ini dibuat?</div>
+    <div class="question"><strong>DARI MANA?</strong>Dari mana sumber aslinya?</div>
+    <div class="question"><strong>MENGAPA?</strong>Mengapa pesan ini ingin membuat saya merasa tertentu?</div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container">
+  <div class="footer-grid">
+    <div><h3>SEHAT CHECK</h3><p>Pause. Verifikasi. Lindungi.</p><p style="margin-top:10px">Membantu masyarakat menjadi lebih kritis terhadap informasi kesehatan di ruang digital.</p></div>
+    <div><h3>Navigasi</h3><a href="#masalah">Masalah</a><a href="#akar">Akar Masalah</a><a href="#factcheck">Fact-Check AI</a><a href="#sumber">Sumber</a></div>
+    <div><h3>Pesan Kami</h3><p>Jangan bagikan ketakutan. Bagikan kebenaran.</p><div style="margin-top:15px"><a href="#factcheck">🔎 Cek Fakta</a></div></div>
+  </div>
+  <div class="small">© 2026 SEHAT CHECK. Website kampanye edukasi. Informasi pada situs ini bukan pengganti konsultasi medis profesional.</div>
+</div>
+</footer>
+
+<div class="access">
+  <button onclick="toggleAccess()" aria-label="Pengaturan aksesibilitas">♿</button>
+  <div class="access-panel" id="accessPanel">
+    <strong>Aksesibilitas</strong>
+    <button onclick="document.body.classList.toggle('big-text')">Perbesar teks</button>
+    <button onclick="document.body.classList.toggle('high-contrast')">Kontras tinggi</button>
+    <button onclick="document.documentElement.style.scrollBehavior='auto'">Kurangi animasi</button>
+  </div>
+</div>
+
+<script>
+function checkClaim(){
+  const claim=document.getElementById('claim').value.trim();
+  const result=document.getElementById('result');
+  const title=document.getElementById('resultTitle');
+  const text=document.getElementById('resultText');
+  if(!claim){
+    result.classList.remove('hidden');
+    title.textContent='Klaim belum dimasukkan';
+    text.textContent='Silakan masukkan klaim kesehatan yang ingin diperiksa terlebih dahulu.';
+    return;
+  }
+  result.classList.remove('hidden');
+  title.textContent='Klaim perlu diverifikasi';
+  text.textContent='Jangan langsung mempercayai atau membagikan klaim ini. Periksa sumber asli, cari bukti ilmiah, dan bandingkan dengan informasi dari organisasi kesehatan yang kredibel. Demo ini belum terhubung ke mesin AI atau database medis secara langsung.';
+}
+function toggleAccess(){
+  const panel=document.getElementById('accessPanel');
+  panel.style.display=panel.style.display==='block'?'none':'block';
+}
+document.querySelector('.menu').addEventListener('click',()=>{
+  const nav=document.querySelector('.navlinks');
+  nav.style.display=nav.style.display==='flex'?'none':'flex';
+  if(nav.style.display==='flex'){
+    nav.style.position='absolute';nav.style.top='74px';nav.style.left='0';nav.style.right='0';
+    nav.style.background='#f7fbfa';nav.style.padding='18px 4%';nav.style.flexDirection='column';nav.style.alignItems='flex-start';
+  }
+});
+</script>
+</body>
+</html>
